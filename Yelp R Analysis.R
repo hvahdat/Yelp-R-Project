@@ -1,4 +1,4 @@
-#Count max amount of categories listed for a single row
+#Count max amount of individual categories listed in categories column for a single row
 max(na.omit(count.fields(textConnection(yelp_tbl$categories), sep = ",")))
 
 #Print unique values in each column
