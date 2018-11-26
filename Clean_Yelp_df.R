@@ -45,3 +45,19 @@ cat.subset<-function(category=""){
   return(as.data.frame(df))                 #Return df
 }
 
+cat.subset<-function(category=""){
+  url<-"https://www.ups.com/worldshiphelp/WS16/ENU/AppHelp/Codes/State_Province_Codes.htm"  
+  pg<- read_html(url)
+  tb<-html_table(pg,fill = TRUE,header = TRUE)
+  states<-tb[[1]]$Code
+  states<-c(states,tb[[2]]$Code)
+  df<-yelp_tbl[grep(category,yelp_tbl$categories),]
+  i<-1
+  results<-integer()
+  while (i <= length(states)) {
+    results<- c(results, grep(paste("^",states[i],"$", sep=""),df$state))
+    i<-i+1
+  }
+  df<-df[results,]
+  return(as.data.frame(df))
+}
