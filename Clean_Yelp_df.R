@@ -25,7 +25,12 @@ colnames(yelp_tbl) <- gsub("hours.","h.", paste(colnames(yelp_tbl)))
 # Export clean dataset into csv file
 write.csv(yelp_tbl, "yelp_df.csv", row.names = FALSE)
 
+# Subsets yelp.tbl by category returns a dataframe
 
+cat.subset<-function(category=""){
+    df<-yelp_tbl[grep(category,yelp_tbl$categories),]
+ return(df)
+   }
 
 
 
