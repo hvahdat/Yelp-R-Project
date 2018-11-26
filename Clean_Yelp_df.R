@@ -26,38 +26,20 @@ colnames(yelp_tbl) <- gsub("hours.","h.", paste(colnames(yelp_tbl)))
 # Export clean dataset into csv file
 write.csv(yelp_tbl, "yelp_df.csv", row.names = FALSE)
 
-# Subsets yelp.tbl by category returns a dataframe
-
-cat.subset<-function(category=""){
+# Subsets yelp.tbl by category returns a dataframe with only US and Canadian businesses
+cat.subset<-function(category=""){                                                          #Create cat.subset function
   url<-"https://www.ups.com/worldshiphelp/WS16/ENU/AppHelp/Codes/State_Province_Codes.htm"  #Link for State/Province Codes
-  pg<- read_html(url)   #read in from url
-  tb<-html_table(pg,fill = TRUE,header = TRUE) #Save tables
-  states<-tb[[1]]$Code                          # Add US codes to list
-  states<-c(states,tb[[2]]$Code)                #Combine US States to Canadian Provinces
-  df<-yelp_tbl[grep(category,yelp_tbl$categories),] #Subset by Category selected
-  i<-1
-  results<-integer()                    
-  while (i <= length(states)) {                     #Search for states/provinces 
-    results<- c(results, grep(states[i],df$state,fixed = TRUE)) #Save row number if states found 
-    i<-i+1
-  }
-  df<-df[results,]                          #Subset with only row in US or Canada
-  return(as.data.frame(df))                 #Return df
-}
-
-cat.subset<-function(category=""){
-  url<-"https://www.ups.com/worldshiphelp/WS16/ENU/AppHelp/Codes/State_Province_Codes.htm"  
-  pg<- read_html(url)
-  tb<-html_table(pg,fill = TRUE,header = TRUE)
-  states<-tb[[1]]$Code
-  states<-c(states,tb[[2]]$Code)
-  df<-yelp_tbl[grep(category,yelp_tbl$categories),]
+  pg<- read_html(url)                                                                       #read in from url
+  tb<-html_table(pg,fill = TRUE,header = TRUE)                                              #Save tables
+  states<-tb[[1]]$Code                                                                      #Add US codes to list
+  states<-c(states,tb[[2]]$Code)                                                            #Combine US States to Canadian Provinces
+  df<-yelp_tbl[grep(category,yelp_tbl$categories),]                                         #Subset by Category selected
   i<-1
   results<-integer()
-  while (i <= length(states)) {
-    results<- c(results, grep(paste("^",states[i],"$", sep=""),df$state))
+  while (i <= length(states)) {                                                             #Search for states/provinces
+    results<- c(results, grep(paste("^",states[i],"$", sep=""),df$state))                   #Save row number if exact match for states found 
     i<-i+1
   }
-  df<-df[results,]
-  return(as.data.frame(df))
+  df<-df[results,]                                                                          #Subset with only row in US or Canada
+  return(as.data.frame(df))                                                                 #Return df
 }
