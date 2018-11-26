@@ -7,6 +7,7 @@ suppressPackageStartupMessages(library(jsonlite)) #This will allow us to handle 
 suppressPackageStartupMessages(library(tibble)) #This will give us a df that is friendly with dplyr
 suppressPackageStartupMessages(library(stringr)) #Use this to filter
 suppressPackageStartupMessages(library(tm)) #This will help us with text mining
+suppressPackageStartupMessages(library(rvest)) #For Scraping data from website
 
 # Import in yelp in json file
 yelp <- stream_in(file("yelp_academic_dataset_business.json"))
@@ -28,13 +29,19 @@ write.csv(yelp_tbl, "yelp_df.csv", row.names = FALSE)
 # Subsets yelp.tbl by category returns a dataframe
 
 cat.subset<-function(category=""){
-    df<-yelp_tbl[grep(category,yelp_tbl$categories),]
- return(df)
-   }
-
-
-
-
-
-
+  url<-"https://www.ups.com/worldshiphelp/WS16/ENU/AppHelp/Codes/State_Province_Codes.htm"  
+  pg<- read_html(url)
+  tb<-html_table(pg,fill = TRUE,header = TRUE)
+  states<-tb[[1]]$Code
+  states<-c(states,tb[[2]]$Code)
+  df<-yelp_tbl[grep(category,yelp_tbl$categories),]
+  i<-1
+  results<-integer()
+  while (i <= length(states)) {
+    results<- c(results, grep(states[i],df$state,fixed = TRUE))
+    i<-i+1
+  }
+  df<-df[results,]
+  return(as.data.frame(df))
+}
 
