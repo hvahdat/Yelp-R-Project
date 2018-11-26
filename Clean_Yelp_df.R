@@ -19,8 +19,8 @@ yelp_tbl <- as_data_frame(yelp_flat)
 
 
 #How to remove attributes. and hours. in front of colnames
-colnames(yelp_tbl) <- gsub("attributes.","",paste(colnames(yelp_tbl)))
-colnames(yelp_tbl) <- gsub("hours.","", paste(colnames(yelp_tbl)))
+colnames(yelp_tbl) <- gsub("attributes.","a.",paste(colnames(yelp_tbl)))
+colnames(yelp_tbl) <- gsub("hours.","h.", paste(colnames(yelp_tbl)))
 
 #Export CSV
 write.csv(yelp_tbl, "yelp_df.csv", row.names = FALSE)
