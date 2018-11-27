@@ -13,6 +13,7 @@ suppressPackageStartupMessages(library(rvest)) #Pull data from www
 suppressPackageStartupMessages(library(sqldf)) #Use SQL code in R
 suppressPackageStartupMessages(library(ggplot2)) #Make charts
 suppressPackageStartupMessages(library(sapply)) #Returns vectors on data manipulations
+suppressPackageStartupMessages(library(scales)) #Stats & visualization
 
 
 # Import in yelp in json file
