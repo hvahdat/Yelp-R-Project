@@ -4,6 +4,7 @@ ASSUMPTIONS:
 
 1. We used David's function in order to get our initial "df" and then worked off of that data (This was built off our yelp_tbl dataframe)
 2. Due to commonality in our codes, we will submit our 3 R files separately. If you want to run something specific, just do one file at a time.
+3. Hutan, Sayo, & David all submitted our R files with our names in it. Just look out for those files.
 
 
 Before we get into what each of our code functionality, we wanted to outline challenges we overcame. I remember Mr. Sam mentioned he wanted us to 
