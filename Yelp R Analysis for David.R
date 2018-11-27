@@ -82,7 +82,7 @@ pie<-na.omit(dfsql)          #Take out rows with NA
 
 write.csv(df,"Gas_Stations.csv")  
 write.csv(pie, "pie.csv")
-## PUT INTO EXCEL TO ADD "OTHER" COLUMN MANUALLY
+## PUT INTO EXCEL TO ADD "OTHER" ROW MANUALLY TO ROW 24
 ##Insert name:Other, count(name):687, percent: 47.379310, keep:1 
 pie<-read.csv("pie.csv")
 
