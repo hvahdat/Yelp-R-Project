@@ -86,6 +86,9 @@ g <- qplot(stars, data = df, geom = "bar", fill = I("red"), color = I("black"),
            xlab = "Stars", ylab = "Count") 
 g    
 
+ggsave(filename = "Star_Dist_Restaurants.png", plot = g, width = 6, height = 4,
+       dpi = 600)
+
 #Return bar chart outlining star distribution of entire  Yelp 2018 data set
 #Discuss how there are some differences in restaurant rating distrubtion 
 #versus the entire yelp dataset distribution of stars
@@ -95,6 +98,9 @@ g1 <- qplot(stars, data = yelp_tbl, geom = "bar", fill = I("red"), color = I("bl
                  alpha = I(0.25), main = "Yelp Star Distribution in all Categories", 
                  xlab = "Stars", ylab = "Count") 
 g1
+
+ggsave(filename = "Star_Dist_All_Cats.png", plot = g1, width = 6, height = 4,
+       dpi = 600)
 
 #Average stars of open businesses =  3.453939 vs closed businesses = 3.415991
 #Discuss how the number of stars doesn't seem to have an impact
@@ -136,7 +142,6 @@ write.csv(VegasFilter, "yelp_df_VegasFilter.csv", row.names = FALSE) #vegas file
 #breakdown of Las Vegas. Color coded by zip code, then broken out by size (dependent on yelp stars)
 g2 <- qplot(longitude, latitude, data = VegasFilter, color = postal_code, size = stars,
 xlim = c(-115.6796,-114.8963), ylim = c(35.60673,36.43031), na.rm = TRUE)
-#g2 <- g2 + scale_shape("City")
 g2 <- g2 + scale_color_hue(name = "Postal Code")
 g2 <- g2 + scale_size("Stars", range = c(0.5,2.5))
 g2 <- g2 + ggtitle("Map of Review Stars for Las Vegas")
@@ -155,5 +160,8 @@ g2 <- g2 + theme(plot.title = element_text(face = "bold"))
   
 g2
 
-ggsave(filename = "Vegas.pdf", plot = g2, width = 8, height = 6,
-       units = "in")
+#ggsave(filename = "Vegas.pdf", plot = g2, width = 8, height = 6,
+       #units = "in")
+
+ggsave(filename = "Vegas_Star_Dist.png", plot = g2, width = 6, height = 4,
+       dpi = 600)
