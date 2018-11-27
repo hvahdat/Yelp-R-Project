@@ -82,6 +82,7 @@ for (i in 1:nrow(dfsql)) {
   }
 }
 pie<-na.omit(dfsql)          #Take out rows with NA 
+pie[nrow(pie) + 1,] <- list(as.character("Other"),as.integer("687"), as.numeric("47.379310"), as.integer("1")) #Insert Row
 
 write.csv(df,"Gas_Stations.csv")  
 write.csv(pie, "pie.csv")
