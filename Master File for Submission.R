@@ -143,9 +143,6 @@ df <- select(df, business_id, name, address,city, state, postal_code, latitude, 
 
 
 
-#Load package to run SQL commands inside of R
-suppressPackageStartupMessages(library(sqldf))
-
 #I am running a SQL command inside of R to grab the restaurant name and the count of times they 
 #show up in the data set. Just grab the top 100 and talk about how all the major chains populate it.
 #Include a picture of the table or a portion of it if you like
@@ -161,9 +158,6 @@ dfsql <- sqldf("select name, count(name) as 'Count'
 #restaurants
 sum(dfsql$Count)
 
-
-#Load graphing cpabilities
-suppressPackageStartupMessages(library(ggplot2))
 
 
 
