@@ -278,7 +278,7 @@ sum(is.na(df)) / (nrow(df) *ncol(df))
 
 
 #Distribution of Stars Rating
-hist(stars_rounded, main = "Distribution of Stars Rating")
+hist(stars, main = "Distribution of Stars Rating")
 
 #Observe average review count by star rating. we see that the average rises steadily by rating
 #whether closes or not, but it peaks at 4.5 and experiences a sharp drop to 13.5 at 5
