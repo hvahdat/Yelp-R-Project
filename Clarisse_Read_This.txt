@@ -1,0 +1,42 @@
+Instructions to write up the report Clarisse! :)
+
+ASSUMPTIONS:
+
+1. We used David's function in order to get our initial "df" and then worked off of that data (This was built off our yelp_tbl dataframe)
+2. Due to commonality in our codes, we will submit our 3 R files separately. If you want to run something specific, just do one file at a time.
+
+
+Before we get into what each of our code functionality, we wanted to outline challenges we overcame. I remember Mr. Sam mentioned he wanted us to 
+talk about them.
+
+CHALLENGES:
+
+Sayo (Beauty & Spa category)
+	-Figuring out how to output stats utilizing sapply package. Needed to push out a table that got counts of values for each column.
+Hutan (Restaurants)
+	-Working with JSON data was a challenge for us. JSON stands of JavaScript object notation which can be nested/hierical. We had to implement a JSON 
+	package which helped "flatten" our data into a tabular form. This then made it digestable for R analysis.
+	-Issues getting dplyr filter function to work properly. FIX: I had to preface it with dplyr::filter because the filter function
+	was not getting recognized appropriately.
+	-Getting the proper coordinates to effectively map the Las Vegas restaurant data. FIX: Use dplyr to filter down data to Las Vegas. Then had to map 
+	the data in order to identify outliers. Some data ended up missing in postal_code column. Those were then eliminated through another dplyr filter.
+	-
+David (Gas Stations)
+	-Mostly creation of the function that takes the yelp_tbl dataframe and can effectively & accurately pull the category. First we needed to pull the state
+	codes for the US/Canada from an HTML table for the USPS website. Then incorporate a while loop that circles through an index (i) all the way through the length
+	of the state codes for the US/Canada. Then it loops through to only pull back data that applies to the exact category we enter into the function.
+	-Getting the pie chart to work. Required a manual addition of a row of "other". This was necessary in order to have all the categories of the 'slices' of
+	a pie. Then getting it to save properly was a challenge since it was not a ggplot graph. Just exported it as a PNG.
+	
+	
+Analysis by person:
+
+All 3 of us loaded our R code with plenty of comments to help you understand what we did and what logic we used.
+
+We tried to be a thorough as possible. You should be able to reproduce all graphs and outputs. 
+
+
+NOTE:
+
+There is a PIE.csv file that was needed for David to get the pie table to work in R. This was where the 'other' category was added in as a 
+'slice' of the pie.
