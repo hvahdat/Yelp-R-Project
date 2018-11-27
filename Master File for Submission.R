@@ -283,11 +283,6 @@ sum(is.na(df)) / (nrow(df) *ncol(df))
 
 
 
-#Convert character to factors 
-
-setDT(df)[,(cat_var) := lapply(.SD, as.factor), .SDcols = cat_var]
-
-
 #Distribution of Stars Rating
 hist(stars_rounded, main = "Distribution of Stars Rating")
 
