@@ -327,15 +327,17 @@ p3 <- qplot(review_count, data = df, geom = "histogram", alpha = I(0.25),
 p3 <- p3 + ggtitle("Distribution of Beauty & Spa Establishments by Number of Reviews")
 p3 <- p3 + theme(panel.grid.major = element_blank())
 p3 <- p3 + theme(panel.grid.minor = element_blank())
+p3 <- p3 + scale_fill_hue(name = "Business Accepts Credit Cards")
 print(p3)
 ggsave(filename = "S3.png", plot = p3, width = 6, height = 4,dpi = 600)
 
 #We observe the all ratings except "5" have more businesses that are not appointment only than those
 #that are. Clearly, the appointment only trait would be required to be regarded as "5"
 p4 <- qplot(stars, data = df, geom = "histogram", alpha = I(0.25), 
-            xlab = "Star Rating", ylab = "Count", log = "x", fill = a.ByAppointmentOnly)
+             xlab = "Star Rating", ylab = "Count", log = "x", fill = a.ByAppointmentOnly)
 p4 <- p4 + ggtitle("Distribution of Beauty & Spa Establishments by Star Rating and Appointment Status")
 p4 <- p4 + theme(panel.grid.major = element_blank())
 p4 <- p4 + theme(panel.grid.minor = element_blank())
+p4 <- p4 + scale_fill_hue(name = "By Appointment Only")
 print(p4)
 ggsave(filename = "S4.png", plot = p4, width = 6, height = 4,dpi = 600)
