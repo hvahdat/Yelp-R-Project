@@ -12,6 +12,7 @@ suppressPackageStartupMessages(library(RGtk2)) #Needed for rattle package
 suppressPackageStartupMessages(library(rvest)) #Pull data from www
 suppressPackageStartupMessages(library(sqldf)) #Use SQL code in R
 suppressPackageStartupMessages(library(ggplot2)) #Make charts
+suppressPackageStartupMessages(library(sapply))
 
 
 # Import in yelp in json file
