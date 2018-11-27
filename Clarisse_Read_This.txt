@@ -7,7 +7,7 @@ ASSUMPTIONS:
 3. Hutan, Sayo, & David all submitted our R files with our names in it. Just look out for those files.
 
 
-Before we get into what each of our code functionality, we wanted to outline challenges we overcame. I remember Mr. Sam mentioned he wanted us to 
+Before we get into what each of our code does for functionality, we wanted to outline challenges we overcame. I remember Mr. Sam mentioned he wanted us to 
 talk about them.
 
 CHALLENGES:
