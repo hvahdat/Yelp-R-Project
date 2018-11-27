@@ -171,15 +171,21 @@ g <- qplot(stars, data = df, geom = "bar", fill = I("red"), color = I("black"),
            xlab = "Stars", ylab = "Count") 
 g    
 
+ggsave(filename = "Star_Dist_Restaurants.png", plot = g, width = 6, height = 4,
+       dpi = 600)
+
 #Return bar chart outlining star distribution of entire  Yelp 2018 data set
 #Discuss how there are some differences in restaurant rating distrubtion 
 #versus the entire yelp dataset distribution of stars
 #The entire distribution is slightly more skewed towards higher ratings, where restaurant
 #reviews seem slightly more balanced
 g1 <- qplot(stars, data = yelp_tbl, geom = "bar", fill = I("red"), color = I("black"), 
-            alpha = I(0.25), main = "Yelp Star Distribution in all Categories", 
-            xlab = "Stars", ylab = "Count") 
+                 alpha = I(0.25), main = "Yelp Star Distribution in all Categories", 
+                 xlab = "Stars", ylab = "Count") 
 g1
+
+ggsave(filename = "Star_Dist_All_Cats.png", plot = g1, width = 6, height = 4,
+       dpi = 600)
 
 #Average stars of open businesses =  3.453939 vs closed businesses = 3.415991
 #Discuss how the number of stars doesn't seem to have an impact
@@ -195,10 +201,10 @@ mean(df$stars[df$is_open == 0])
 #size is dependent on stars of restaurants. 
 
 dfsql2 <- sqldf("select distinct city, count(city) as 'Count'
-                from df
-                group by city
-                order by count(city) desc
-                limit 100")
+               from df
+               group by city
+               order by count(city) desc
+               limit 100")
 
 
 
@@ -220,8 +226,7 @@ write.csv(VegasFilter, "yelp_df_VegasFilter.csv", row.names = FALSE) #vegas file
 #Plot code to try and pull all the info together. This is the graphic that will show a geographic
 #breakdown of Las Vegas. Color coded by zip code, then broken out by size (dependent on yelp stars)
 g2 <- qplot(longitude, latitude, data = VegasFilter, color = postal_code, size = stars,
-            xlim = c(-115.6796,-114.8963), ylim = c(35.60673,36.43031), na.rm = TRUE)
-#g2 <- g2 + scale_shape("City")
+xlim = c(-115.6796,-114.8963), ylim = c(35.60673,36.43031), na.rm = TRUE)
 g2 <- g2 + scale_color_hue(name = "Postal Code")
 g2 <- g2 + scale_size("Stars", range = c(0.5,2.5))
 g2 <- g2 + ggtitle("Map of Review Stars for Las Vegas")
@@ -230,18 +235,23 @@ g2 <- g2 + theme(axis.text = element_blank())
 g2 <- g2 + theme(axis.ticks = element_blank())
 g2 <- g2 + theme(panel.grid = element_blank())
 g2 <- g2 + theme(panel.border = element_rect(linetype = "solid", color = "black",
-                                             fill = NA))
+                                           fill = NA))
 g2 <- g2 + theme(legend.text = element_text(size = 8))
 g2 <- g2 + theme(legend.key.size = unit(0.12, "in"))
 g2 <- g2 + theme(title = element_text(size = 12))
 g2 <- g2 + theme(legend.spacing = unit(0, "in"))
 g2 <- g2 + theme(legend.key = element_rect(fill = NA))
 g2 <- g2 + theme(plot.title = element_text(face = "bold"))
-
+  
 g2
 
-ggsave(filename = "Vegas.pdf", plot = g2, width = 8, height = 6,
-       units = "in")
+#ggsave(filename = "Vegas.pdf", plot = g2, width = 8, height = 6,
+       #units = "in")
+
+ggsave(filename = "Vegas_Star_Dist.png", plot = g2, width = 6, height = 4,
+       dpi = 600)
+
+
 
 
 
