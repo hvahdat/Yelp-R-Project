@@ -82,12 +82,13 @@ for (i in 1:nrow(dfsql)) {
   }
 }
 pie<-na.omit(dfsql)          #Take out rows with NA 
+
+#Insert name:Other, count(name):687, percent: 47.379310, keep:1 
 pie[nrow(pie) + 1,] <- list(as.character("Other"),as.integer("687"), as.numeric("47.379310"), as.integer("1")) #Insert Row
 
 write.csv(df,"Gas_Stations.csv")  
 write.csv(pie, "pie.csv")
-## PUT INTO EXCEL TO ADD "OTHER" ROW MANUALLY TO ROW 24
-##Insert name:Other, count(name):687, percent: 47.379310, keep:1 
+
 pie<-read.csv("pie.csv")
 
 #Plot pie chart with 23 Gas Station names and 1 "Other" 
