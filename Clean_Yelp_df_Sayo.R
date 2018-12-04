@@ -107,24 +107,39 @@ df %>%
   mutate(Percent = (Count/sum(Count)) *100)
 
 
+#Change is_open data to Open and Closed Businesses
+df$is_open <- as.character(df$is_open)
+
+wh0 <- which(df$is_open == '0')
+wh1 <- which(df$is_open == '1')
+
+df$is_open[wh0] <- 'Closed Business'
+df$is_open[wh1] <- 'Open Business' 
+
+df$is_open <- as.factor(df$is_open)
+
 #Distribution of star ratings faceted by open status. We observe a steady rise among closed businesses
 #, among open businesses there is a steady rise that steadies between 3.5 and 4.5, then a 
 #significant rise to 5
-p1 <- qplot(stars, data = df, geom = "bar", fill = I("blue"), alpha = I(0.25), 
+p1 <- qplot(stars, data = df, geom = "bar", fill = I("black"), alpha = I(0.85),
             xlab = "Stars", ylab = "Count", facets = .~is_open)
 p1 <- p1 + ggtitle("Distribution of Beauty & Spa Establishments across Star Ratings")
 p1 <- p1 + theme(panel.grid.major = element_blank())
 p1 <- p1 + theme(panel.grid.minor = element_blank())
+p1 <- p1 + theme(panel.border = element_blank())
+p1 <- p1 + theme(panel.background = element_blank())
 print(p1)
-ggsave(filename = "S1.png", plot = p1, width = 6, height = 4,dpi = 600)
+ggsave(filename = "S5.png", plot = p1, width = 6, height = 4,dpi = 600)
 
 #We observe the distribution of the review count. Majority of them are within 0 and 100,
 #and for the most part there is a steady decline
-p2 <- qplot(review_count, data = df, geom = "histogram", fill = I("green"), alpha = I(0.25), 
+p2 <- qplot(review_count, data = df, geom = "histogram", fill = I("black"), alpha = I(0.85),
             xlab = "Number of Reviews", ylab = "Count", log = "x")
 p2 <- p2 + ggtitle("Beauty & Spa Establishments by Number of Reviews")
 p2 <- p2 + theme(panel.grid.major = element_blank())
 p2 <- p2 + theme(panel.grid.minor = element_blank())
+p2 <- p2 + theme(panel.border = element_blank())
+p2 <- p2 + theme(panel.background = element_blank())
 print(p2)
 ggsave(filename = "S2.png", plot = p2, width = 6, height = 4,dpi = 600)
 
@@ -132,23 +147,26 @@ ggsave(filename = "S2.png", plot = p2, width = 6, height = 4,dpi = 600)
 #we observe the vast majority of the reviews were by businesses that accept credit cards.
 #it's notable that as the number of reviews increase, the number of businesses 
 #who don't accept credit cards reduce
-p3 <- qplot(review_count, data = df, geom = "histogram", alpha = I(0.25), 
+p3 <- qplot(review_count, data = df, geom = "histogram", alpha = I(0.85),
             xlab = "Number of Reviews", ylab = "Count", log = "x", fill = a.BusinessAcceptsCreditCards)
 p3 <- p3 + ggtitle("Beauty & Spa Establishments by Number of Reviews")
 p3 <- p3 + theme(panel.grid.major = element_blank())
 p3 <- p3 + theme(panel.grid.minor = element_blank())
+p3 <- p3 + theme(panel.border = element_blank())
+p3 <- p3 + theme(panel.background = element_blank())
 p3 <- p3 + scale_fill_hue(name = "Business Accepts Credit Cards")
 print(p3)
 ggsave(filename = "S3.png", plot = p3, width = 6, height = 4,dpi = 600)
 
 #We observe the all ratings except "5" have more businesses that are not appointment only than those
 #that are. Clearly, the appointment only trait would be required to be regarded as "5"
-p4 <- qplot(stars, data = df, geom = "histogram", alpha = I(0.25), 
-             xlab = "Star Rating", ylab = "Count", log = "x", fill = a.ByAppointmentOnly)
+p4 <- qplot(stars, data = df, geom = "histogram", binwidth = 0.5, alpha = I(1), color = I("black"),
+             xlab = "Star Rating", ylab = "Count", fill = a.ByAppointmentOnly)
 p4 <- p4 + ggtitle("Beauty & Spa Establishments by Star Rating & Appointment Type")
 p4 <- p4 + theme(panel.grid.major = element_blank())
 p4 <- p4 + theme(panel.grid.minor = element_blank())
-p4 <- p4 + scale_fill_hue(name = "By Appointment Only")
+p4 <- p4 + theme(panel.border = element_blank())
+p4 <- p4 + theme(panel.background = element_blank())
+p4 <- p4 + scale_fill_brewer(palette = "Set2", name = "By Appointment Only")
 print(p4)
 ggsave(filename = "S4.png", plot = p4, width = 6, height = 4,dpi = 600)
-
